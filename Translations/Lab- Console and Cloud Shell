@@ -1,0 +1,69 @@
+
+# Lab: Console and Cloud Shell
+
+## Objectives
+
+	- Get access to Google Cloud.
+
+	- Create a Cloud Storage bucket using the Cloud Console.
+
+	- Create a Cloud Storage bucket using Cloud Shell.
+
+	- Become familiar with Cloud Shell features.
+
+## Steps
+
+1. Create a storage bucket named man4pickin2020 
+   gsutil mb gs://man4pickin2020
+
+2. Create a second bucket named man5pickin2020
+   gsutil mb gs://man5pickin2020
+
+3. Upload a file name joe.jpg stored in my computer destop to the Bucket named man4pickin2020
+   gsutil cp Desktop/joe.jpg gs://man4pickin2020
+
+## Create a persistent state in Cloud Shell
+
+4. To list available regions
+   gcloud compute regions list
+
+5. Create an environment variable with anyone of the regions listed, example asia-east1
+   INFRACLASS_REGION=[asia-east1]
+
+6. Verify it with echo
+   echo $INFRACLASS_REGION
+
+## Append the environment variable to a file
+
+7. Create a subdirectory for materials used in this class:
+   mkdir infraclass
+
+8. Create a file called config in the infraclass directory
+   touch infraclass/config
+
+9. Append the value of your Region environment variable to the config file:
+   echo INFRACLASS_REGION=$INFRACLASS_REGION >> ~/infraclass/config
+
+10. Create a second environment variable for your Project ID
+   INFRACLASS_PROJECT_ID=[qwiklabs-gcp-03-0db225c94259]
+
+11. Append the value of your Project ID environment variable to the config file
+   echo INFRACLASS_PROJECT_ID=$INFRACLASS_PROJECT_ID >> ~/infraclass/config
+
+12. Use the source command to set the environment variables, and use the echo command to verify that the project variable was set:
+   source infraclass/config
+   echo $INFRACLASS_PROJECT_ID
+
+13. Reopen shell and run the echo command
+    echo $INFRACLASS_PROJECT_ID
+
+## Modify the bash profile and create persistence
+
+14. Edit the shell profile
+   nano .profile
+
+15. Add the following line to the end of the file:
+   source infraclass/config
+
+16.Close and reopen shell and verify that the variable is still set:
+   echo $INFRACLASS_PROJECT_ID

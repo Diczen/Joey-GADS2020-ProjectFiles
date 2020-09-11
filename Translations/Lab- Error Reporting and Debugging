@@ -1,0 +1,64 @@
+
+# LAB: Error Reporting and Debugging 
+
+## Objectives
+
+In this lab, you learn how to perform the following tasks:
+	a. Launch a simple Google App Engine application
+
+	b. Introduce an error into the application
+
+	c. Explore Cloud Error Reporting
+
+	d. Use Cloud Debugger to identify the error in the code
+
+	e. Fix the bug and monitor in Cloud Operations
+
+## Steps
+
+1. To create a local folder and get the App Engine Hello world application run the following commands in the gcloud command line interface
+   mkdir appengine-hello
+   cd appengine-hello
+   gsutil cp gs://cloud-training/archinfra/gae-hello/* .
+
+2. Run the application using the local development server with the following command
+   dev_appserver.py $(pwd) 
+
+3. Exit the Deployment Manager
+   Ctrl+c
+
+4. Deploy the application to App Engine, select east-asia region and Select Yes to continue with the following commands;
+   gcloud app deploy app.yaml
+   1
+   Y
+
+5. Verify that the application is working
+   gcloud app browse
+
+## Introducing an error to break the application
+6. To examine the main.py
+   cat main.py
+
+7. Use the sed stream editor to change the import library to the nonexistent webapp22
+   sed -i -e 's/webapp2/webapp22/' main.py
+
+8. Verify the change made in the main.py file
+   cat main.py
+
+9. Re-deploy the application to App Engine
+   gcloud app deploy app.yaml --quiet
+
+10. verify that the application is broken by running
+   gcloud app browse
+
+11. To view the error logs 
+   gcloud logging logs list
+
+12. Fix the error by running
+   sed -i -e 's/webapp22/webapp2/' main.py
+
+13. Re-deploy the application to App Engine
+   gcloud app deploy app.yaml --quiet
+
+14. Verify that the application is working again
+   gcloud app browse

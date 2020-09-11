@@ -1,0 +1,44 @@
+
+# Lab: Creating Virtual Machines
+
+Objectives
+	- Create several standard VMs
+
+	- Create advanced VMs
+
+## Steps
+
+1. Create a compute engine virtual machine with the gcp console
+   gcloud compute instances create my-5-vm --machine-type="n1-standard-1" --network-interface=no-address 
+
+## Explore the VM logs
+2. Read the VM logs
+   gcloud logging logs | read --configuration
+
+3. Create a windows Virtual Machine Instance 
+   gcloud compute instances create my-6-vm --machine-type "n1-standard-2" --image-project "Windows server" --image "Windows Server 2016 Datacenter Core" --boot-disk-type "SSD persistent disk" --boot-disk-size "100GB" --tags http, https
+
+## Create a custom VM
+
+4. Create a custom compute engine virtual machine with the gcp console
+   gcloud compute instances create my-7-vm --region "us-west1" --zone "us-west1-b" --machine-type "custom" --custom-cpu "6" --custom-memory "32GB"
+
+# Connect via SSH to your custom VM
+
+8. To open SSH on the custom VM
+   gcloud compute ssh my-7-vm 
+
+9. To see information about unused and used memory and swap space on your custom VM,
+   free
+
+10. To see details about the RAM installed on your VM
+   sudo dmidecode -t 17
+
+11. To verify the number of processors,
+   nproc
+
+12. To see details about the CPUs installed on your VM
+   lscpu
+
+13. To exit the SSH terminal,
+   exit
